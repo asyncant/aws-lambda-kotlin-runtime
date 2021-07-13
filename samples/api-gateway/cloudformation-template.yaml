@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Hello world using kotlin/native.
+
+Resources:
+  lambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code: ./build/lambda/lambda.zip
+      Description: Api gateway sample using kotlin/native.
+      FunctionName: !Sub ${AWS::StackName}-lambda
+      Handler: notUsed
+      MemorySize: 128
+      Role: !GetAtt iamRole.Arn
+      Runtime: provided
+      Timeout: 3
+
+  iamRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  api:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: Kotlin/Native API
+      Description: Api gateway sample using kotlin/native.
+      ProtocolType: HTTP
+      Target: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambda.Arn}/invocations
+
+  apiGatewayInvokeLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt lambda.Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${api}/*
+
+Outputs:
+  api:
+    Value: !GetAtt api.ApiEndpoint
