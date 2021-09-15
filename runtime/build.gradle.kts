@@ -20,13 +20,6 @@ kotlin {
     else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
   }
 
-  nativeTarget.apply {
-    compilations["main"].cinterops {
-      val libcurl by creating {
-        includeDirs.headerFilterOnly("/usr/include")
-      }
-    }
-  }
   sourceSets {
     val commonMain by getting {
       dependencies {

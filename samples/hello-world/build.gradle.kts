@@ -22,7 +22,6 @@ kotlin {
     binaries {
       executable {
         entryPoint = "main"
-        linkerOpts("/usr/lib64/libcurl.so")
       }
     }
   }

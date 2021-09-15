@@ -1,12 +1,5 @@
 package com.asyncant.http
 
-/** A blocking http client with no thread-safety guarantees. */
-expect class BlockingHttpClient() {
-  fun get(uri: String, headers: Map<String, String>): HttpResponse
-  fun post(uri: String, payload: ByteArray, headers: Map<String, String>): HttpResponse
-  fun close()
-}
-
 data class HttpResponse(val body: ByteArray, val headers: Map<String, List<String>>, val statusCode: Int) {
   override fun toString() = "HttpResponse(status=${statusCode},headers=${headers},body=${body.decodeToString()})"
 
@@ -28,4 +21,3 @@ data class HttpResponse(val body: ByteArray, val headers: Map<String, List<Strin
     return result
   }
 }
-

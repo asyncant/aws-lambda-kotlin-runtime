@@ -1,16 +1,14 @@
 package com.asyncant.aws.lambda.runtime
 
-import com.asyncant.http.BlockingHttpClient
 import com.asyncant.http.HttpResponse
 import com.asyncant.json.toJsonString
-import com.asyncant.platform.requireEnv
 
 /** Communicates with the Lambda environment about events to process. */
-class LambdaClient(private val httpClient: BlockingHttpClient) {
-  private val invokeUrl = "http://${requireEnv("AWS_LAMBDA_RUNTIME_API")}/2018-06-01/runtime/invocation"
+class LambdaClient(private val httpClient: AwsLambdaRuntimeHttp11Client) {
+  private val invokeUrl = "/2018-06-01/runtime/invocation"
 
   fun retrieveNextEvent(): InvocationEvent {
-    val response = httpClient.get("${invokeUrl}/next", emptyMap())
+    val response = httpClient.get("${invokeUrl}/next")
     require(response.statusCode == 200) { "Status 200 expected for next invocation, got: $response" }
     return InvocationEvent(response.body, contextFromResponse(response))
   }

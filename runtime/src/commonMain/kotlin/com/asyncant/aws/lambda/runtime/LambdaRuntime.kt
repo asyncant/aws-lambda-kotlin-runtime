@@ -1,6 +1,6 @@
 package com.asyncant.aws.lambda.runtime
 
-import com.asyncant.http.BlockingHttpClient
+import com.asyncant.platform.requireEnv
 
 /** Convenience wrapper around [runBinaryLambda] that accepts [String]s and ignores the event context. */
 inline fun runLambda(crossinline handler: (String) -> String) = runLambda { event, _ -> handler.invoke(event) }
@@ -19,7 +19,7 @@ inline fun runLambda(crossinline handler: (event: String, context: EventContext)
  *   When the handler throws an exception, the invocation will be reported as failed with the exceptions message.
  */
 inline fun runBinaryLambda(crossinline handler: (event: ByteArray, context: EventContext) -> ByteArray) {
-  val httpClient = BlockingHttpClient()
+  val httpClient = createHttpClient()
   val client = LambdaClient(httpClient)
   while (true) {
     val event = client.retrieveNextEvent()
@@ -34,3 +34,6 @@ inline fun runBinaryLambda(crossinline handler: (event: ByteArray, context: Even
   }
   httpClient.close()
 }
+
+fun createHttpClient() =
+  AwsLambdaRuntimeHttp11Client(requireEnv("AWS_LAMBDA_RUNTIME_API"))

@@ -1,16 +1,20 @@
 # AWS Lambda Kotlin Runtime
 
-A low overhead kotlin/native based custom runtime for [AWS Lambda](https://aws.amazon.com/lambda/):
+A low overhead kotlin/native based custom runtime for [AWS Lambda](https://aws.amazon.com/lambda/) with a cold start
+between 9 and 15ms:
 ```
-// Cold start
-REPORT Duration: 0.87 ms  Billed Duration: 30 ms  Memory Size: 128 MB  Max Memory Used: 36 MB  Init Duration: 28.78 ms
-// Warm invocation
-REPORT Duration: 0.64 ms  Billed Duration: 1 ms  Memory Size: 128 MB  Max Memory Used: 36 MB
+REPORT Duration: 0.60 ms  Billed Duration: 12 ms  Memory Size: 128 MB  Max Memory Used: 25 MB  Init Duration: 10.49 ms
+```
+And a warm invocation <1ms:
+```
+REPORT Duration: 0.53 ms  Billed Duration: 1 ms  Memory Size: 128 MB  Max Memory Used: 25 MB
 ```
 
 ## Usage
 
 ```kotlin
+import com.asyncant.aws.lambda.runtime.runLambda
+
 fun main() = runLambda { event ->
   println("Received: $event")
   "Hello world!"
@@ -19,6 +23,8 @@ fun main() = runLambda { event ->
 
 Or with initialization code:
 ```kotlin
+import com.asyncant.aws.lambda.runtime.runLambda
+
 fun main() {
   /* << Initialization code >> */
 
@@ -46,5 +52,3 @@ sourceControl {
 ```kotlin
   implementation("com.asyncant.aws.lambda:runtime:0.1-SNAPSHOT")
 ```
-
-
