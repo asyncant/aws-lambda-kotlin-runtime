@@ -21,7 +21,7 @@ fun main() = runLambda { event ->
 }
 ```
 
-Or with initialization code:
+Or with initialization code and context:
 ```kotlin
 import com.asyncant.aws.lambda.runtime.runLambda
 
