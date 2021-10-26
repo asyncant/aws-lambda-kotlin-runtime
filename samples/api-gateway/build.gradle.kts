@@ -1,6 +1,6 @@
 plugins {
   kotlin("multiplatform")
-  kotlin("plugin.serialization")
+  kotlin("plugin.serialization") version "1.5.31"
 }
 group = "com.asyncant.samples"
 version = "0.0.123"
@@ -30,6 +30,7 @@ kotlin {
     val nativeMain by getting {
       dependencies {
         implementation(project(":runtime"))
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
       }
     }
     val nativeTest by getting

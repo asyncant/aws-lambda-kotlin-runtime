@@ -1,6 +1,5 @@
 plugins {
   kotlin("multiplatform")
-  kotlin("plugin.serialization")
   jacoco
 }
 group = rootProject.group
