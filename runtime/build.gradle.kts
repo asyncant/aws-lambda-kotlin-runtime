@@ -1,5 +1,6 @@
 plugins {
   kotlin("multiplatform")
+  id("org.jetbrains.dokka") version "1.4.32"
   jacoco
 }
 group = rootProject.group
@@ -35,4 +36,10 @@ kotlin {
 
     val nativeTest by getting
   }
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+  dependsOn(tasks.dokkaHtml)
+  archiveClassifier.set("javadoc")
+  from(tasks.dokkaHtml.get().outputDirectory)
 }

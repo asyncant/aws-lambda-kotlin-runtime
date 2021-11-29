@@ -5,7 +5,7 @@ import com.asyncant.http.HttpResponse
 /**
  * Just enough http/1.1 client to communicate with the AWS Lambda runtime API.
  */
-class AwsLambdaRuntimeHttp11Client internal constructor(host: String) {
+class AwsLambdaRuntimeHttp11Client constructor(host: String) {
   private val ip: String = host.substringBefore(':')
   private val port: Int = host.substringAfter(':', "80").toInt()
   private var socket = TcpSocket(ip, port)

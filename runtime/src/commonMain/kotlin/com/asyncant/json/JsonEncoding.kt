@@ -1,7 +1,7 @@
 package com.asyncant.json
 
 /** Encodes a [String] into a json string with escaping for special characters. */
-fun toJsonString(text: String): String {
+internal fun toJsonString(text: String): String {
   val result = StringBuilder()
   result.append("\"")
   for (c in text) {
