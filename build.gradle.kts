@@ -2,7 +2,7 @@ plugins {
   kotlin("multiplatform") version "1.5.31" apply false
 }
 group = "com.asyncant.aws.lambda"
-version = "0.1-SNAPSHOT"
+version = "0.8"
 
 allprojects {
   repositories {
