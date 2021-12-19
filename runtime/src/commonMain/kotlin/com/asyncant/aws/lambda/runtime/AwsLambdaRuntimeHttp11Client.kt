@@ -1,6 +1,9 @@
 package com.asyncant.aws.lambda.runtime
 
 import com.asyncant.http.HttpResponse
+import com.asyncant.http.HttpResponseBuilder
+import com.asyncant.io.NotConnectedException
+import com.asyncant.io.TcpSocket
 
 /**
  * Just enough http/1.1 client to communicate with the AWS Lambda runtime API.

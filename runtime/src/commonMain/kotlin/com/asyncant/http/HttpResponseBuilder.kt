@@ -1,6 +1,6 @@
-package com.asyncant.aws.lambda.runtime
+package com.asyncant.http
 
-import com.asyncant.http.HttpResponse
+import com.asyncant.io.MessageReceiver
 
 internal class HttpResponseBuilder : MessageReceiver {
   private var statusCode: Int = -1

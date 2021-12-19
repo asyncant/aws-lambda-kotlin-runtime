@@ -1,4 +1,4 @@
-package com.asyncant.aws.lambda.runtime
+package com.asyncant.io
 
 internal expect class TcpSocket(ip: String, port: Int) {
   fun receiveMessage(builder: MessageReceiver)

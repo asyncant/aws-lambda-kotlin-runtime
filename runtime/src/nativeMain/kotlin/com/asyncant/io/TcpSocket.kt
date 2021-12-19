@@ -1,4 +1,4 @@
-package com.asyncant.aws.lambda.runtime
+package com.asyncant.io
 
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.alloc
@@ -74,4 +74,3 @@ internal actual class TcpSocket actual constructor(ip: String, port: Int) {
     fd
   }
 }
-

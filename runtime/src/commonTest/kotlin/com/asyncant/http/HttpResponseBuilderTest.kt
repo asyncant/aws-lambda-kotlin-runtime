@@ -1,6 +1,5 @@
-package com.asyncant.aws.lambda.runtime
+package com.asyncant.http
 
-import com.asyncant.http.HttpResponse
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

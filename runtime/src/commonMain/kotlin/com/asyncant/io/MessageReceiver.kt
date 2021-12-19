@@ -1,4 +1,4 @@
-package com.asyncant.aws.lambda.runtime
+package com.asyncant.io
 
 internal interface MessageReceiver {
   fun append(data: ByteArray, size: Int)
