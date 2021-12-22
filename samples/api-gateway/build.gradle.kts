@@ -5,9 +5,6 @@ plugins {
 group = "com.asyncant.samples"
 version = "0.0.123"
 
-repositories {
-  mavenCentral()
-}
 kotlin {
   val hostOs = System.getProperty("os.name")
   val isMingwX64 = hostOs.startsWith("Windows")
@@ -30,7 +27,7 @@ kotlin {
     val nativeMain by getting {
       dependencies {
         implementation(project(":runtime"))
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+        implementation(libs.kotlinserialization)
       }
     }
     val nativeTest by getting

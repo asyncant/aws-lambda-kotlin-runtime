@@ -4,9 +4,6 @@ plugins {
 group = "com.asyncant.samples"
 version = "0.0.123"
 
-repositories {
-  mavenCentral()
-}
 kotlin {
   val hostOs = System.getProperty("os.name")
   val isMingwX64 = hostOs.startsWith("Windows")

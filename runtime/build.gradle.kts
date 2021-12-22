@@ -8,10 +8,6 @@ plugins {
 group = rootProject.group
 version = rootProject.version
 
-repositories {
-  mavenLocal()
-  mavenCentral()
-}
 kotlin {
   val hostOs = System.getProperty("os.name")
   val isMingwX64 = hostOs.startsWith("Windows")
