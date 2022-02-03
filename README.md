@@ -41,7 +41,7 @@ The library can be found on Maven Central [here](https://search.maven.org/artifa
 ### Gradle
 
 ```kotlin
-implementation("com.asyncant.aws.lambda:runtime:0.8")
+implementation("com.asyncant.aws.lambda:runtime:0.8.1")
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ implementation("com.asyncant.aws.lambda:runtime:0.8")
 <dependency>
     <groupId>com.asyncant.aws.lambda</groupId>
     <artifactId>runtime</artifactId>
-    <version>0.8</version>
+    <version>0.8.1</version>
 </dependency>
 ```
 
@@ -58,7 +58,7 @@ implementation("com.asyncant.aws.lambda:runtime:0.8")
 
 The artifacts on Maven Central target `linux_64` matching the AWS Lambda environment, to execute the library in other
 environments (e.g. while developing), the project can also be included as a source dependency through Gradle.
-The configuration below will instruct Gradle to pull the sources from GitHub, compile them locally and include them as
+The configuration below instructs Gradle to pull the sources from GitHub, compile them locally and include them as
 a dependency for a project.
 
 `settings.gradle.kts`:
@@ -71,5 +71,5 @@ sourceControl {
 ```
 `build.gradle.kts`:
 ```kotlin
-  implementation("com.asyncant.aws.lambda:runtime:0.8")
+  implementation("com.asyncant.aws.lambda:runtime:0.8.1")
 ```
