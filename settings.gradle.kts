@@ -1,4 +1,4 @@
-include("runtime", "samples:hello-world", "samples:api-gateway")
+include("runtime", "samples:hello-world", "samples:api-gateway", "samples:lambda-function-urls")
 
 enableFeaturePreview("VERSION_CATALOGS")
 dependencyResolutionManagement {
