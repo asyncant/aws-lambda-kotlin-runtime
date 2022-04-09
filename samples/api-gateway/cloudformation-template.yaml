@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Hello world using kotlin/native.
+Description: Api Gateway sample using kotlin/native.
 
 Resources:
   lambda:

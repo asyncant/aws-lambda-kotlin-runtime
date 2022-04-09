@@ -13,11 +13,15 @@ fun main() = runLambda { event ->
   val requestBody = if (request.isBase64Encoded) request.body?.decodeFromBase64()?.decodeToString() else request.body
 
   val responseBody = """
-    Method: ${request.requestContext.http.method}
-    Path: ${request.rawPath}
-    Parameters: ${request.queryStringParameters}
-    Headers: ${request.headers}
-    Body: $requestBody
+    ################################################################
+    Hello from kotlin/native api gateway sample!
+    ################################################################
+    This sample was invoked with:
+    - Method: ${request.requestContext.http.method}
+    - Path: ${request.rawPath}
+    - Parameters: ${request.queryStringParameters}
+    - Headers: ${request.headers}
+    - Body: $requestBody
   """.trimIndent()
   val response = ApiGatewayResponse(200, responseBody, false)
 
