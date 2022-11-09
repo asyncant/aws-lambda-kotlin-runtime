@@ -3,11 +3,11 @@
 A low overhead kotlin/native based custom runtime for [AWS Lambda](https://aws.amazon.com/lambda/) with a cold start
 between 9 and 15ms:
 ```
-REPORT Duration: 0.60 ms  Billed Duration: 12 ms  Memory Size: 128 MB  Max Memory Used: 25 MB  Init Duration: 10.49 ms
+REPORT Duration: 0.58 ms  Billed Duration: 12 ms  Memory Size: 128 MB  Max Memory Used: 13 MB  Init Duration: 10.48 ms
 ```
 And a warm invocation <1ms:
 ```
-REPORT Duration: 0.53 ms  Billed Duration: 1 ms  Memory Size: 128 MB  Max Memory Used: 25 MB
+REPORT Duration: 0.53 ms  Billed Duration: 1 ms  Memory Size: 128 MB  Max Memory Used: 16 MB
 ```
 
 ## Usage
