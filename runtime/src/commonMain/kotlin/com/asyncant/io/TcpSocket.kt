@@ -7,5 +7,5 @@ internal expect class TcpSocket(ip: String, port: Int) {
 }
 
 open class SocketException(message: String) : IllegalStateException(message)
-class NotConnectedException() : SocketException("The socket is not connected.")
+class NotConnectedException : SocketException("The socket is not connected.")
 
