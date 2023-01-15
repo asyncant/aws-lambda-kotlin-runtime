@@ -67,8 +67,9 @@ internal actual class TcpSocket actual constructor(ip: String, port: Int) {
     val fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
     val connected = connect(fd, serverAddr.ptr.reinterpret(), sizeOf<sockaddr_in>().convert())
     if (connected < 0) {
+      val connectErrorNumber = errno
       close(fd)
-      throw SocketException("Error connecting, error number: $errno")
+      throw SocketException("Error connecting, error number: $connectErrorNumber")
     }
 
     fd
