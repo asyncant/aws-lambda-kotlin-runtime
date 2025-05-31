@@ -1,4 +1,10 @@
-include("runtime", "samples:hello-world", "samples:api-gateway", "samples:lambda-function-urls")
+include(
+  "runtime",
+  "samples:hello-world",
+  "samples:hello-world-al2023",
+  "samples:api-gateway",
+  "samples:lambda-function-urls"
+)
 
 dependencyResolutionManagement {
   @Suppress("UnstableApiUsage")
