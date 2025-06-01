@@ -1,8 +1,10 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
   kotlin("multiplatform")
   id("org.jetbrains.dokka") version "1.6.10"
   jacoco
-  id("maven-publish")
+  id("com.vanniktech.maven.publish") version "0.32.0"
   id("signing")
 }
 group = rootProject.group
@@ -36,45 +38,34 @@ val javadocJar by tasks.registering(Jar::class) {
   from(tasks.dokkaHtml.get().outputDirectory)
 }
 
-publishing {
-  repositories {
-    maven {
-      name = "sonatype"
-      val releaseUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-      val snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-      setUrl(if (version.toString().endsWith("SNAPSHOT")) snapshotUrl else releaseUrl)
+mavenPublishing {
+  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-      credentials(PasswordCredentials::class)
+  signAllPublications()
+
+  coordinates(group.toString(), project.name, version.toString())
+
+  pom {
+    name = "aws-lambda-kotlin-runtime"
+    description = "Kotlin/Native runtime for AWS Lambda."
+    url = "https://github.com/asyncant/aws-lambda-kotlin-runtime"
+    licenses {
+      license {
+        name = "MIT"
+        distribution = "repo"
+      }
     }
-  }
-
-  publications.withType<MavenPublication> {
-    artifact(javadocJar)
-    pom {
-      name.set("aws-lambda-kotlin-runtime")
-      description.set("Kotlin/Native runtime for AWS Lambda.")
-      url.set("https://github.com/asyncant/aws-lambda-kotlin-runtime")
-
-      licenses {
-        license {
-          name.set("MIT")
-          distribution.set("repo")
-        }
+    developers {
+      developer {
+        id = "asyncant"
+        name = "asyncant"
+        url = "http://www.asyncant.com"
       }
-
-      developers {
-        developer {
-          id.set("asyncant")
-          name.set("asyncant")
-          url.set("http://www.asyncant.com")
-        }
-      }
-
-      scm {
-        connection.set("scm:git:git://github.com/asyncant/aws-lambda-kotlin-runtime.git")
-        developerConnection.set("scm:git:ssh://github.com/asyncant/aws-lambda-kotlin-runtime.git")
-        url.set("https://github.com/asyncant/aws-lambda-kotlin-runtime")
-      }
+    }
+    scm {
+      connection = "scm:git:git://github.com/asyncant/aws-lambda-kotlin-runtime.git"
+      developerConnection = "scm:git:ssh://github.com/asyncant/aws-lambda-kotlin-runtime.git"
+      url = "https://github.com/asyncant/aws-lambda-kotlin-runtime"
     }
   }
 }
