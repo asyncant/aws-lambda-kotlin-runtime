@@ -9,7 +9,7 @@ script_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 mkdir -p "${script_dir}/build/lambda"
 rm "${script_dir}/build/lambda/lambda.zip" > /dev/null 2>&1 || true
 
-cp "${script_dir}/build/bin/linuxX64/releaseExecutable/hello-world-al2023.kexe" "${script_dir}/build/lambda/bootstrap"
+cp "${script_dir}/build/bin/linuxArm64/releaseExecutable/hello-world-arm64.kexe" "${script_dir}/build/lambda/bootstrap"
 
 # Remove Kotlin's unused dependency on libcrypt as it is not present on Amazon Linux 2023.
 # * https://youtrack.jetbrains.com/issue/KT-55643
