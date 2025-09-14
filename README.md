@@ -10,6 +10,8 @@ And a warm invocation <1ms:
 REPORT Duration: 0.53 ms  Billed Duration: 1 ms  Memory Size: 128 MB  Max Memory Used: 16 MB
 ```
 
+The runtime supports both x86_64 and ARM64 architectures.
+
 ## Usage
 
 ```kotlin
@@ -52,24 +54,4 @@ implementation("com.asyncant.aws.lambda:runtime:0.9.0")
     <artifactId>runtime</artifactId>
     <version>0.9.0</version>
 </dependency>
-```
-
-### Non linux_x64 targets
-
-The artifacts on Maven Central target `linux_64` matching the AWS Lambda environment, to execute the library in other
-environments (e.g. while developing), the project can also be included as a source dependency through Gradle.
-The configuration below instructs Gradle to pull the sources from GitHub, compile them locally and include them as
-a dependency for a project.
-
-`settings.gradle.kts`:
-```kotlin
-sourceControl {
-  gitRepository(java.net.URI("https://github.com/asyncant/aws-lambda-kotlin-runtime.git")) {
-    producesModule("com.asyncant.aws.lambda")
-  }
-}
-```
-`build.gradle.kts`:
-```kotlin
-  implementation("com.asyncant.aws.lambda:runtime:0.9.0")
 ```

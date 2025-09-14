@@ -12,6 +12,7 @@ version = rootProject.version
 
 kotlin {
   linuxX64()
+  linuxArm64()
 
   sourceSets {
     commonTest {
