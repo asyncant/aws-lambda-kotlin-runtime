@@ -43,7 +43,7 @@ The library can be found on Maven Central [here](https://search.maven.org/artifa
 ### Gradle
 
 ```kotlin
-implementation("com.asyncant.aws.lambda:runtime:0.9.0")
+implementation("com.asyncant.aws.lambda:runtime:0.9.5")
 ```
 
 ### Maven
@@ -52,6 +52,6 @@ implementation("com.asyncant.aws.lambda:runtime:0.9.0")
 <dependency>
     <groupId>com.asyncant.aws.lambda</groupId>
     <artifactId>runtime</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.5</version>
 </dependency>
 ```
