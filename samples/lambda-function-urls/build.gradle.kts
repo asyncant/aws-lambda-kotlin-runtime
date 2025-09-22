@@ -1,6 +1,6 @@
 plugins {
   kotlin("multiplatform")
-  kotlin("plugin.serialization") version "2.1.21"
+  kotlin("plugin.serialization") version "2.2.20"
 }
 group = "com.asyncant.samples"
 version = "0.0.123"
