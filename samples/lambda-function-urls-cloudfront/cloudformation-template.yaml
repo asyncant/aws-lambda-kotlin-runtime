@@ -27,7 +27,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
-  invokePermission:
+  invokePermissionUrl:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName: !GetAtt lambda.Arn
@@ -36,6 +36,14 @@ Resources:
       FunctionUrlAuthType: AWS_IAM
       SourceArn: !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${distribution}
 #      FunctionUrlAuthType: NONE
+
+  invokePermissionFunction:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt lambda.Arn
+      Action: lambda:InvokeFunction
+      Principal: '*'
+      SourceArn: !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${distribution}
 
   url:
     Type: AWS::Lambda::Url
