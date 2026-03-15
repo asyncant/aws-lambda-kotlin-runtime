@@ -11,7 +11,7 @@ Resources:
       Handler: notUsed
       MemorySize: 128
       Role: !GetAtt iamRole.Arn
-      Runtime: provided.al2
+      Runtime: provided.al2023
       Timeout: 3
 
   iamRole:

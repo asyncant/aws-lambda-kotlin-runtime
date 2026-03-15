@@ -1,7 +1,6 @@
 include(
   "runtime",
   "samples:hello-world",
-  "samples:hello-world-al2023",
   "samples:hello-world-arm64",
   "samples:api-gateway",
   "samples:lambda-function-urls"
