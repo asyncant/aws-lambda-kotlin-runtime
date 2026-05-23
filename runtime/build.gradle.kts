@@ -1,10 +1,8 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
   kotlin("multiplatform")
   id("org.jetbrains.dokka") version "1.6.10"
   jacoco
-  id("com.vanniktech.maven.publish") version "0.32.0"
+  id("com.vanniktech.maven.publish") version "0.36.0"
   id("signing")
 }
 group = rootProject.group
@@ -39,14 +37,8 @@ kotlin {
   }
 }
 
-val javadocJar by tasks.registering(Jar::class) {
-  dependsOn(tasks.dokkaHtml)
-  archiveClassifier.set("javadoc")
-  from(tasks.dokkaHtml.get().outputDirectory)
-}
-
 mavenPublishing {
-  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+  publishToMavenCentral()
 
   signAllPublications()
 
