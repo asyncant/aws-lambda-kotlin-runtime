@@ -1,6 +1,6 @@
 plugins {
   kotlin("multiplatform")
-  id("org.jetbrains.dokka") version "1.6.10"
+  id("org.jetbrains.dokka") version "2.2.0"
   jacoco
   id("com.vanniktech.maven.publish") version "0.36.0"
   id("signing")
