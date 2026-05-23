@@ -10,9 +10,18 @@ container_gradle_home="/workspace/samples/hello-world-graalvm/build/gradle-user-
 
 mkdir -p "${script_dir}/build/gradle-user-home"
 
-docker run --rm \
+if command -v podman > /dev/null; then
+  container_command=podman
+  container_user=""
+else
+  container_command=docker
+  container_user="--user=$(id -u):$(id -g)"
+fi
+
+# shellcheck disable=SC2086
+"${container_command}" run --rm \
   --platform "${docker_platform}" \
-  --user "$(id -u):$(id -g)" \
+  ${container_user} \
   --volume "${repo_root}:/workspace" \
   --workdir /workspace \
   --env GRADLE_USER_HOME="${container_gradle_home}" \
