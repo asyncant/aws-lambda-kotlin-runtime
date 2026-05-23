@@ -11,6 +11,7 @@ group = rootProject.group
 version = rootProject.version
 
 kotlin {
+  jvm()
   linuxX64()
   linuxArm64()
 
@@ -19,6 +20,11 @@ kotlin {
       dependencies {
         implementation(kotlin("test-common"))
         implementation(kotlin("test-annotations-common"))
+      }
+    }
+    jvmTest {
+      dependencies {
+        implementation(kotlin("test-junit5"))
       }
     }
   }
@@ -48,7 +54,7 @@ mavenPublishing {
 
   pom {
     name = "aws-lambda-kotlin-runtime"
-    description = "Kotlin/Native runtime for AWS Lambda."
+    description = "Kotlin runtime for AWS Lambda with Kotlin/Native and JVM/GraalVM support."
     url = "https://github.com/asyncant/aws-lambda-kotlin-runtime"
     licenses {
       license {

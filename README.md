@@ -1,7 +1,7 @@
 # AWS Lambda Kotlin Runtime
 
-A low overhead kotlin/native based custom runtime for [AWS Lambda](https://aws.amazon.com/lambda/) with a cold start
-between 9 and 15ms:
+A low overhead Kotlin custom runtime for [AWS Lambda](https://aws.amazon.com/lambda/) with a cold start
+between 9 and 15ms (for Kotlin Native):
 ```
 REPORT Duration: 0.58 ms  Billed Duration: 12 ms  Memory Size: 128 MB  Max Memory Used: 13 MB  Init Duration: 10.48 ms
 ```
@@ -10,7 +10,7 @@ And a warm invocation <1ms:
 REPORT Duration: 0.53 ms  Billed Duration: 1 ms  Memory Size: 128 MB  Max Memory Used: 16 MB
 ```
 
-The runtime supports both x86_64 and ARM64 architectures.
+The runtime supports Kotlin/Native on both x86_64 and ARM64 architectures, and also publishes a JVM target that can be compiled to a Lambda bootstrap with GraalVM Native Image.
 
 ## Usage
 
