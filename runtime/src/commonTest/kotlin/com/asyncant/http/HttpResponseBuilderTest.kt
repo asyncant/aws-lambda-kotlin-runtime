@@ -180,6 +180,45 @@ internal class HttpResponseBuilderTest {
   }
 
   @Test
+  fun chunkedBodyHeadersAndPartialBodyInSamePacket() {
+    // Regression test for ArrayIndexOutOfBoundsException when the first TCP
+    // segment contains the HTTP headers AND the chunked transfer-encoding header
+    // AND the beginning of the chunk data, but not the complete chunk body.
+    // In the HEADER state, readChunksToBuffer() was called speculatively and
+    // tried to copy chunkSize bytes into a ByteArray(dataSize) that was smaller
+    // than the declared chunk size, causing an AIOOBE on the destination bound.
+    val builder = HttpResponseBuilder()
+
+    val headers =
+      "HTTP/1.1 200 OK\r\n" +
+        "Content-Type: application/json\r\n" +
+        "Lambda-Runtime-Aws-Request-Id: abc-123-def\r\n" +
+        "Lambda-Runtime-Deadline-Ms: 123\r\n" +
+        "Lambda-Runtime-Invoked-Function-Arn: arn:aws:lambda:eu-central-1:123:function:kotlin-native-hello-world\r\n" +
+        "Lambda-Runtime-Trace-Id: Root=1-123-abc;Parent=456;Sampled=0\r\n" +
+        "Date: Wed, 10 Aug 2021 20:00:00 GMT\r\n" +
+        "Transfer-Encoding: chunked\r\n" +
+        "\r\n"
+
+    val body = "Hello world! Test!"
+    val fullChunked = "${body.length.toString(16)}\r\n$body\r\n0\r\n\r\n"
+
+    // Simulate first TCP segment: headers + chunk header + first byte of body
+    val firstPacket = headers + fullChunked.take(body.length.toString(16).length + 3)
+    builder.append(firstPacket.encodeToByteArray(), firstPacket.length)
+    // Must not throw and must not be complete yet
+    assertFalse(builder.completed())
+
+    // Simulate second TCP segment: rest of body + terminal chunk
+    val remainder = fullChunked.drop(body.length.toString(16).length + 3)
+    builder.append(remainder.encodeToByteArray(), remainder.length)
+    assertTrue(builder.completed())
+
+    val expectedHeaders = expected.headers + ("Transfer-Encoding" to listOf("chunked")) - "Content-Length"
+    assertEquals(HttpResponse(body.encodeToByteArray(), expectedHeaders, 200), builder.build())
+  }
+
+  @Test
   fun chunkedBodyAsOneResponse() {
     val builder = HttpResponseBuilder()
 

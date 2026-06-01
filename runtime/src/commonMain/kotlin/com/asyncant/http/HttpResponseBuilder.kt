@@ -86,6 +86,8 @@ internal class HttpResponseBuilder : MessageReceiver {
         return true
       }
 
+      if (readIndex + chunkSize > dataSize) return false
+
       dataBuffer.copyInto(data, startIndex = readIndex, endIndex = readIndex + chunkSize, destinationOffset = dataIndex)
       readIndex += chunkSize + 2
       dataIndex += chunkSize
